@@ -6,7 +6,7 @@ remote MCP server lets an AI assistant read your company's job posts, hiring pro
 answer questions about your hiring in plain words, and prepare actions such as inviting, moving or rejecting candidates.
 
 This repository holds no server code: the server is hosted by Flowmingo. It holds what the AI directories need to list it,
-a Claude plugin, a Gemini CLI extension and setup notes for agents (`llms-install.md`).
+a Claude plugin, a Cursor plugin, a ChatGPT plugin package, a Gemini CLI extension and setup notes for agents (`llms-install.md`).
 
 - **Server URL:** `https://mcp.flowmingo.ai/mcp` (Streamable HTTP; there is no SSE endpoint)
 - **Full setup guide for every client:** <https://flowmingo.ai/integration/mcp>
@@ -81,6 +81,8 @@ Everything is scoped to your organisation. The API, webhooks and this MCP server
 | Path | For |
 | --- | --- |
 | `.claude-plugin/plugin.json`, `.mcp.json`, `skills/` | the Claude plugin: the connector plus two skills for reviewing and acting on candidates |
+| `.cursor-plugin/plugin.json` (with the same `skills/`) | the Cursor plugin |
+| `chatgpt/` | the ChatGPT plugin package and how to build its ZIP |
 | `gemini-extension.json`, `GEMINI.md` | the Gemini CLI extension |
 | `llms-install.md` | setup steps an agent such as Cline can follow |
 | `server.json` | the entry on the official MCP Registry (`ai.flowmingo/flowmingo`) |

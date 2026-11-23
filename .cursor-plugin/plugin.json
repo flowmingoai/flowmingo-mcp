@@ -1,0 +1,24 @@
+{
+  "name": "flowmingo",
+  "displayName": "Flowmingo",
+  "version": "1.0.0",
+  "description": "Review candidates and move them through your Flowmingo hiring pipeline: AI interview results, comparisons, invites, stage moves and rejects, with a person approving anything that emails a candidate.",
+  "author": {
+    "name": "Flowmingo",
+    "email": "contact@flowmingo.ai"
+  },
+  "homepage": "https://flowmingo.ai/integration/mcp",
+  "repository": "https://github.com/flowmingoai/flowmingo-mcp",
+  "license": "MIT",
+  "logo": "assets/flowmingo-400.png",
+  "keywords": ["flowmingo", "hiring", "recruiting", "ats", "ai-interview", "candidates", "mcp"],
+  "category": "integrations",
+  "tags": ["flowmingo", "recruiting", "ats", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "flowmingo": {
+      "type": "http",
+      "url": "https://mcp.flowmingo.ai/mcp"
+    }
+  }
+}
