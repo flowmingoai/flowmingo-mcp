@@ -95,6 +95,7 @@
             }
           ]
         },
+        "demo_recording_url": "https://github.com/flowmingoai/flowmingo-mcp/releases/download/v1.0.0/flowmingo-chatgpt-walkthrough.mp4",
         "commerce": false,
         "commerce_description": "This plugin does not sell products or process payments."
       },
