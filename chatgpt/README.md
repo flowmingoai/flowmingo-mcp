@@ -5,18 +5,16 @@ platform.openai.com/plugins. The skills are the repository's own `skills/`, so t
 
 ## Build the ZIP
 
-From the repository root, on macOS or Linux:
+Make a folder holding, at its top level:
 
-```text
-rm -rf /tmp/flowmingo-chatgpt && mkdir -p /tmp/flowmingo-chatgpt/assets dist
-cp chatgpt/plugin.json chatgpt/mcp.json /tmp/flowmingo-chatgpt/
-cp -R skills /tmp/flowmingo-chatgpt/skills
-cp .claude-plugin/icon.png /tmp/flowmingo-chatgpt/assets/logo.png
-cp .claude-plugin/icon.png /tmp/flowmingo-chatgpt/assets/icon.png
-(cd /tmp/flowmingo-chatgpt && zip -q -r -X - plugin.json mcp.json skills assets) > dist/flowmingo-chatgpt-1.0.0.zip
-```
+1. `plugin.json` and `mcp.json` from this folder;
+2. a copy of the repository's `skills/` folder;
+3. an `assets/` folder with the plugin icon from `.claude-plugin/` saved under the two names that `plugin.json` gives
+   for `logo` and `composerIcon`.
 
-Change `1.0.0` to the `version` in `plugin.json`. `dist/` is ignored by git; upload the ZIP, never commit it. Reviewer
-credentials go in the OpenAI dashboard only, never in this folder.
+Zip the folder's contents (not the folder itself) as `flowmingo-chatgpt-<version>.zip`, with the `version` from
+`plugin.json`. Keep the ZIP in `dist/`, which git ignores: upload it, never commit it. Reviewer credentials go in the
+OpenAI dashboard only, never in this folder.
 
-(There is no build script on purpose: Claude's plugin directory refuses scripts from organisations it has not verified.)
+(There is no build script on purpose: Claude's plugin directory refuses scripts from organisations it has not verified,
+and holds a version whose text names an image file in a command.)
