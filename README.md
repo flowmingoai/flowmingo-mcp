@@ -83,7 +83,6 @@ Everything is scoped to your organisation. The API, webhooks and this MCP server
 | `.claude-plugin/plugin.json`, `.mcp.json`, `skills/` | the Claude plugin: the connector plus two skills for reviewing and acting on candidates |
 | `gemini-extension.json`, `GEMINI.md` | the Gemini CLI extension |
 | `llms-install.md` | setup steps an agent such as Cline can follow |
-| `assets/flowmingo-400.png` | the logo |
 | `server.json` | the entry on the official MCP Registry (`ai.flowmingo/flowmingo`) |
 
 ## License
