@@ -1,0 +1,13 @@
+{
+  "name": "flowmingo-mcp",
+  "version": "1.0.0",
+  "description": "Flowmingo hiring data in Gemini CLI: job posts, candidates, AI interview results, and invites, moves and rejects that a person approves.",
+  "mcpServers": {
+    "flowmingo": {
+      "httpUrl": "https://mcp.flowmingo.ai/mcp",
+      "authProviderType": "dynamic_discovery",
+      "timeout": 30000
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}
