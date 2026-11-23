@@ -17,5 +17,8 @@
     "ai-interview",
     "candidates"
   ],
-  "privacyPolicyUrl": "https://flowmingo.ai/privacy-policy"
+  "privacyPolicyUrl": "https://flowmingo.ai/privacy-policy",
+  "supportUrl": "https://flowmingo.ai/contact",
+  "documentationUrl": "https://flowmingo.ai/integration/mcp",
+  "termsOfServiceUrl": "https://flowmingo.ai/terms-of-service"
 }
