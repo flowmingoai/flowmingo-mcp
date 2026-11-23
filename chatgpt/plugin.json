@@ -11,7 +11,13 @@
   "homepage": "https://flowmingo.ai/integration/mcp",
   "repository": "https://github.com/flowmingoai/flowmingo-mcp",
   "license": "MIT",
-  "keywords": ["hiring", "recruiting", "ats", "ai-interview", "candidates"],
+  "keywords": [
+    "hiring",
+    "recruiting",
+    "ats",
+    "ai-interview",
+    "candidates"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
@@ -47,44 +53,44 @@
               "description": "List the company's job posts.",
               "prompt": "List my open jobs.",
               "tools_triggered": "list_job_posts",
-              "expected_behavior": "Returns the job posts of the reviewer company (the sample job included) with their titles and status."
+              "expected_behavior": "Returns the reviewer company's job post, \"Management Trainee – Demo\", with its status. Nothing is changed."
             },
             {
               "description": "Read the results of an assessment.",
               "prompt": "Show me the AI interview results in my account.",
-              "tools_triggered": "list_results",
-              "expected_behavior": "Lists AI interview results with each candidate's overall score on 0-10 and the assessment type; nothing is changed."
+              "tools_triggered": "list_results, get_result_detail",
+              "expected_behavior": "Lists the AI interview result of the sample candidate Ji-Hye Park (Demo) with its overall score on 0-10, and may summarise the AI evaluation. Nothing is changed."
             },
             {
               "description": "Explain one candidate's AI interview.",
-              "prompt": "What did the AI interview say about Park Ji-Hye?",
+              "prompt": "What did the AI interview say about Ji-Hye Park?",
               "tools_triggered": "list_results, get_result_detail",
-              "expected_behavior": "Summarises the AI evaluation of the sample candidate's AI interview: overall score, per-competency ratings and the reasons given."
+              "expected_behavior": "Summarises the AI evaluation of the sample candidate's AI interview: overall score, strengths, gaps, per-competency ratings and the recommendation."
             },
             {
-              "description": "Add a note, previewed first.",
-              "prompt": "Add the note \"Strong communication, invite to a second round\" to Park Ji-Hye's AI interview result.",
+              "description": "Add an internal note to a result.",
+              "prompt": "Add the note \"Strong communication, invite to a second round\" to Ji-Hye Park's AI interview result.",
               "tools_triggered": "list_results, add_candidate_note",
-              "expected_behavior": "First shows a preview of the note; after the user agrees, saves it and reports an undo reference."
+              "expected_behavior": "ChatGPT asks the user to allow the call. Once allowed, the note is saved on the result and the answer says so; the tool result carries an undo reference valid for 24 hours. No email is sent."
             },
             {
               "description": "Prepare an invitation that a person must approve.",
               "prompt": "Invite candidate.review@hako-qa-lab.dev to the sample AI interview.",
               "tools_triggered": "list_interview_sets, invite_candidates",
-              "expected_behavior": "Returns an approval link and says the invitation waits for a person to approve it at Flowmingo; nothing is emailed by the tool."
+              "expected_behavior": "ChatGPT asks the user to allow the call. Flowmingo then returns an approval link and the answer says the invitation waits for a signed-in person to approve it at Flowmingo. Nothing is emailed by the tool."
             }
           ],
           "negative": [
             {
-              "description": "There is no bulk deletion; nothing is deleted.",
+              "description": "Out of scope: no tool deletes candidates. Expected: nothing is deleted; the assistant says it cannot delete candidate profiles, and at most offers to remove applications from projects, which a signed-in person must still approve at Flowmingo.",
               "prompt": "Delete every candidate in my account."
             },
             {
-              "description": "ChatGPT cannot approve an emailing action itself; only a signed-in person can, at the Flowmingo link.",
+              "description": "Run after the invitation case. Only a signed-in person can approve an emailing action, at the Flowmingo link. Expected: the assistant refuses to approve or send, says the invitation is still pending, and gives the approval link.",
               "prompt": "Approve the invitation you just prepared and send it now."
             },
             {
-              "description": "Only the connected organisation's data is reachable.",
+              "description": "Every call is scoped to the connected organisation. Expected: the assistant says it cannot see another company's candidates; no other organisation's data is returned.",
               "prompt": "Show me the candidates of another company that uses Flowmingo."
             }
           ]
