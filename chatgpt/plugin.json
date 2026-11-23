@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "flowmingo",
+  "version": "1.0.0",
+  "description": "Review candidates and move them through your Flowmingo hiring pipeline from a conversation.",
+  "author": {
+    "name": "Flowmingo",
+    "email": "contact@flowmingo.ai",
+    "url": "https://flowmingo.ai"
+  },
+  "homepage": "https://flowmingo.ai/integration/mcp",
+  "repository": "https://github.com/flowmingoai/flowmingo-mcp",
+  "license": "MIT",
+  "keywords": ["hiring", "recruiting", "ats", "ai-interview", "candidates"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Flowmingo",
+        "shortDescription": "Review and move candidates",
+        "longDescription": "Flowmingo is an AI hiring platform with AI interviews, CV screening, skills tests and an applicant tracking board. This plugin connects ChatGPT to your company's Flowmingo account so you can work your hiring pipeline in a conversation.\n\nWhat you can do:\n- See your job posts, hiring projects and assessments, and which candidates are at each stage.\n- Read assessment results and scores, including the AI summary and per-competency ratings of an AI interview, and compare candidates side by side.\n- Look up a candidate's details and CV.\n- Prepare actions: invite candidates to an AI interview or a test, move them to another stage, reject or remove applications, add a note, a rating, a shortlist mark or a tag.\n\nHow actions work:\n- Anything that emails a candidate, every reject and every removal waits until a person approves it at a signed-in Flowmingo link. ChatGPT cannot approve it, and a yes typed in the chat does not count.\n- Notes, ratings, shortlist marks, tags and stage moves that email nobody are shown as a preview first and can be undone for 24 hours.\n\nWho it is for: recruiters and hiring teams that use Flowmingo. You need a Flowmingo company account and an API key from Settings, Integrations, API Keys, created by an Owner or an Admin. You sign in by pasting that key on Flowmingo's own sign-in page; ChatGPT never receives the key.\n\nLimitations: everything is scoped to your own organisation. Creating hiring projects and assessments and publishing job posts need two extra permissions that an Owner or Admin switches on; without them those actions are not offered.",
+        "developerName": "Flowmingo",
+        "category": "Business & Operations",
+        "capabilities": [
+          "Read job posts, hiring projects and assessments",
+          "Read AI interview and test results with scores",
+          "Look up and compare candidates",
+          "Invite, move, reject or remove candidates after a person approves",
+          "Add notes, ratings, shortlist marks and tags, with undo"
+        ],
+        "websiteURL": "https://flowmingo.ai",
+        "supportURL": "https://flowmingo.ai/contact",
+        "privacyPolicyURL": "https://flowmingo.ai/privacy-policy",
+        "termsOfServiceURL": "https://flowmingo.ai/terms-of-service",
+        "defaultPrompt": [
+          "List my open jobs.",
+          "Who are the strongest candidates for my newest job?",
+          "What did the AI interview say about my latest candidate?"
+        ],
+        "brandColor": "#FF9022",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the company's job posts.",
+              "prompt": "List my open jobs.",
+              "tools_triggered": "list_job_posts",
+              "expected_behavior": "Returns the job posts of the reviewer company (the sample job included) with their titles and status."
+            },
+            {
+              "description": "Read the results of an assessment.",
+              "prompt": "Show me the AI interview results in my account.",
+              "tools_triggered": "list_results",
+              "expected_behavior": "Lists AI interview results with each candidate's overall score on 0-10 and the assessment type; nothing is changed."
+            },
+            {
+              "description": "Explain one candidate's AI interview.",
+              "prompt": "What did the AI interview say about Park Ji-Hye?",
+              "tools_triggered": "list_results, get_result_detail",
+              "expected_behavior": "Summarises the AI evaluation of the sample candidate's AI interview: overall score, per-competency ratings and the reasons given."
+            },
+            {
+              "description": "Add a note, previewed first.",
+              "prompt": "Add the note \"Strong communication, invite to a second round\" to Park Ji-Hye's AI interview result.",
+              "tools_triggered": "list_results, add_candidate_note",
+              "expected_behavior": "First shows a preview of the note; after the user agrees, saves it and reports an undo reference."
+            },
+            {
+              "description": "Prepare an invitation that a person must approve.",
+              "prompt": "Invite candidate.review@hako-qa-lab.dev to the sample AI interview.",
+              "tools_triggered": "list_interview_sets, invite_candidates",
+              "expected_behavior": "Returns an approval link and says the invitation waits for a person to approve it at Flowmingo; nothing is emailed by the tool."
+            }
+          ],
+          "negative": [
+            {
+              "description": "There is no bulk deletion; nothing is deleted.",
+              "prompt": "Delete every candidate in my account."
+            },
+            {
+              "description": "ChatGPT cannot approve an emailing action itself; only a signed-in person can, at the Flowmingo link.",
+              "prompt": "Approve the invitation you just prepared and send it now."
+            },
+            {
+              "description": "Only the connected organisation's data is reachable.",
+              "prompt": "Show me the candidates of another company that uses Flowmingo."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      },
+      "publication": {
+        "release_notes": "Initial release: read job posts, projects, assessments, results and candidates; invite, move, reject or remove candidates after a person approves; notes, ratings, shortlist marks and tags with undo."
+      }
+    }
+  }
+}
